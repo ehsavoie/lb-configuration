@@ -1,5 +1,6 @@
 embed-server --std-out=echo  --server-config=standalone-openshift.xml
 /subsystem=undertow/server=default-server/host=default-host/setting=http-invoker:undefine-attribute(name=security-realm)
+/subsystem=messaging-activemq/server=default:write-attribute(name=security-enabled, value=false)
 /socket-binding-group=standard-sockets/remote-destination-outbound-socket-binding=ha-proxy:add(host=lb-test.127.0.0.1.nip.io, port=80)
 /subsystem=messaging-activemq/server=default:write-attribute(name=cluster-password, value="${jboss.messaging.cluster.password:CHANGE ME!!!}")
 /subsystem=messaging-activemq/server=default/http-connector=proxy-connector:add(endpoint=http-acceptor, socket-binding=ha-proxy)
