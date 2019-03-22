@@ -1,3 +1,5 @@
+package org.wildfly.load.balancer.server;
+
 
 import java.util.logging.Logger;
 import javax.ejb.ActivationConfigProperty;
@@ -27,7 +29,7 @@ import javax.jms.TextMessage;
  * @author Emmanuel Hugonnet (c) 2018 Red Hat, inc.
  */
 @MessageDriven(name = "InQueueMDB", activationConfig = {
-    @ActivationConfigProperty(propertyName = "destinationLookup", propertyValue = "queue/InQueue"),
+    @ActivationConfigProperty(propertyName = "destinationLookup", propertyValue = "/queue/inQueue"),
     @ActivationConfigProperty(propertyName = "destinationType", propertyValue = "javax.jms.Queue"),
     @ActivationConfigProperty(propertyName = "acknowledgeMode", propertyValue = "Auto-acknowledge")})
 public class InQueueMDB implements MessageListener {
