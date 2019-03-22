@@ -8,6 +8,7 @@ embed-server --std-out=echo  --server-config=standalone-openshift.xml
 /subsystem=messaging-activemq/server=default/discovery-group=dg-group1:add(jgroups-cluster=activemq-cluster)
 /subsystem=messaging-activemq/server=default/cluster-connection=my-cluster:add(cluster-connection-address=jms, discovery-group=dg-group1, connector-name=http-connector)
 /subsystem=messaging-activemq/server=default/jms-queue=inQueue:add(durable=true, entries=["/queue/inQueue","java:jboss/exported/queue/inQueue"])
+/subsystem=messaging-activemq/server=default/jms-queue=outQueue:add(durable=true, entries=["/queue/outQueue","java:jboss/exported/queue/outQueue"])
 /subsystem=messaging-activemq/server=default/connection-factory=RemoteConnectionFactory:write-attribute(name=ha, value=true)
 /subsystem=messaging-activemq/server=default/connection-factory=RemoteConnectionFactory:write-attribute(name=connectors, value=[proxy-connector])
 /subsystem=messaging-activemq/server=default/connection-factory=RemoteConnectionFactory:write-attribute(name=block-on-acknowledge, value=true)

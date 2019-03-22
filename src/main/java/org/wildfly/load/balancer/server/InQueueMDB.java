@@ -2,11 +2,15 @@ package org.wildfly.load.balancer.server;
 
 
 import java.util.logging.Logger;
+import javax.annotation.Resource;
 import javax.ejb.ActivationConfigProperty;
 import javax.ejb.MessageDriven;
+import javax.inject.Inject;
+import javax.jms.JMSContext;
 import javax.jms.JMSException;
 import javax.jms.Message;
 import javax.jms.MessageListener;
+import javax.jms.Queue;
 import javax.jms.TextMessage;
 
 /*
@@ -36,6 +40,10 @@ public class InQueueMDB implements MessageListener {
 
     private static final Logger LOGGER = Logger.getLogger(InQueueMDB.class.toString());
 
+    @Inject
+    private JMSContext context;
+    @Resource(lookup = "java:/queue/outQueue")
+    private Queue queue;
     /**
      * @param rcvMessage
      * @see MessageListener#onMessage(Message)
@@ -45,7 +53,8 @@ public class InQueueMDB implements MessageListener {
         try {
             if (rcvMessage instanceof TextMessage) {
                 TextMessage msg = (TextMessage) rcvMessage;
-                LOGGER.info("Received Message from queue: " + msg.getText());
+                LOGGER.info("Received Message from queue: " + msg.getText() + " resending it to " + queue);
+                context.createProducer().send(queue, msg.getText());
             } else {
                 LOGGER.warning("Message of wrong type: " + rcvMessage.getClass().getName());
             }
