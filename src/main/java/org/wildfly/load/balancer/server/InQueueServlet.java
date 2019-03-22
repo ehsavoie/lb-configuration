@@ -23,28 +23,12 @@ import java.time.Instant;
 import javax.annotation.Resource;
 import javax.inject.Inject;
 import javax.jms.JMSContext;
-import javax.jms.JMSDestinationDefinition;
-import javax.jms.JMSDestinationDefinitions;
 import javax.jms.Queue;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
-/**
- * Definition of the two JMS destinations used by the quickstart
- * (one queue and one topic).
- */
-@JMSDestinationDefinitions(
-    value = {
-        @JMSDestinationDefinition(
-            name = "java:/queue/inQueue",
-            interfaceName = "javax.jms.Queue",
-            destinationName = "inQueue"
-        )
-    }
-)
 
 /**
  * <p>
