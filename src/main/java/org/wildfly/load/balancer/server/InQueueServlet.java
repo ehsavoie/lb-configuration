@@ -39,7 +39,7 @@ import javax.servlet.http.HttpServletResponse;
 @JMSDestinationDefinitions(
     value = {
         @JMSDestinationDefinition(
-            name = "/queue/inQueue",
+            name = "java:/queue/inQueue",
             interfaceName = "javax.jms.Queue",
             destinationName = "inQueue"
         )
